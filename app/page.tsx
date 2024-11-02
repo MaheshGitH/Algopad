@@ -1,10 +1,13 @@
-import CTA from "./components/CTA/CTA";
-import Feature from "./components/feature/Feature";
-import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
-import HowItWork from "./components/howitwork/HowItWork";
-import Nav from "./components/Nav";
-import Notice from "./components/notice/Notice";
+import UseChoice from "./components/UseChoice";
+import {
+  Nav,
+  Header,
+  Feature,
+  HowItWork,
+  CTA,
+  Notice,
+  Footer,
+} from "./components/homepage";
 
 export default function Home() {
   return (
@@ -16,6 +19,7 @@ export default function Home() {
       <CTA />
       <Notice />
       <Footer />
+      <UseChoice></UseChoice>
     </main>
   );
 }

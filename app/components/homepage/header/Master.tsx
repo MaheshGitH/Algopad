@@ -11,7 +11,7 @@ const Master = () => {
         sketch out solutions before diving into code.
       </h2>
       <a
-        href="/canva"
+        href="?device=choose"
         className="border-primary font-nunito border ~text-base/xl text-primary py-4 px-8 rounded-full hover:bg-primary duration-200 hover:text-white"
       >
         Try now
