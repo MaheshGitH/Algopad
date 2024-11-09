@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const Master = () => {
   return (
     <div className="w-full flex flex-col ~gap-8/14 items-center self-center text-center">
@@ -10,12 +12,12 @@ const Master = () => {
         tool. Use your mobile as a trackpad and your computer as a canvas to
         sketch out solutions before diving into code.
       </h2>
-      <a
+      <Link
         href="?device=choose"
         className="border-primary font-nunito border ~text-base/xl text-primary py-4 px-8 rounded-full hover:bg-primary duration-200 hover:text-white"
       >
         Try now
-      </a>
+      </Link>
     </div>
   );
 };

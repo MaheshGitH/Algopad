@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 
@@ -13,12 +14,18 @@ const UseChoice = () => {
           <p>Use this device as</p>
 
           <div className="flex flex-col gap-1 w-full ~text-lg/2xl font-nunito">
-            <button className="rounded-t-2xl ~py-8/10 bg-white/10 hover:bg-white/30 duration-200">
+            <Link
+              href="/canva"
+              className="rounded-t-2xl ~py-8/10 bg-white/10 hover:bg-white/30 duration-200 text-center"
+            >
               Canva
-            </button>
-            <button className="rounded-b-2xl ~py-8/10 bg-white/10 hover:bg-white/30 duration-200">
+            </Link>
+            <Link
+              href="/trackpad"
+              className="rounded-b-2xl ~py-8/10 bg-white/10 hover:bg-white/30 duration-200 text-center"
+            >
               Trackpad
-            </button>
+            </Link>
           </div>
         </div>
       </div>

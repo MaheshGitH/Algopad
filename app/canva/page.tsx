@@ -1,5 +1,9 @@
-import Canva from "./components/Canva";
+import ConnectDevice from "./components/ConnectDevice";
 
 export default function page() {
-  return <Canva />;
+  return (
+    <main className="text-white bg-dark h-screen flex flex-col">
+      <ConnectDevice />
+    </main>
+  );
 }
