@@ -17,17 +17,17 @@ app.prepare().then(() => {
   io.on("connection", (socket) => {
     socket.on("roomId", (id) => {
       socket.join(id);
-
-      socket.on("ping", () => {
+      function deviceCount(id) {
         const room = io.sockets.adapter.rooms.get(id);
         const deviceCount = room ? room.size : 0;
+
         io.to(id).emit("count", deviceCount);
-      });
+      }
+
+      deviceCount(id);
 
       socket.on("disconnect", () => {
-        const room = io.sockets.adapter.rooms.get(id);
-        const deviceCount = room ? room.size : 0;
-        io.to(id).emit("count", deviceCount);
+        deviceCount(id);
       });
 
       socket.on("coordinates", (cor) => {
@@ -40,6 +40,10 @@ app.prepare().then(() => {
 
       socket.on("orientation", (portrait) => {
         io.to(id).emit("orientation", portrait);
+      });
+
+      socket.on("fingers", (value) => {
+        io.to(id).emit("fingers", value);
       });
     });
   });

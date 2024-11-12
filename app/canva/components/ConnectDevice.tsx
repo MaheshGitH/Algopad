@@ -11,6 +11,7 @@ const ConnectDevice = () => {
   const router = useRouter();
 
   useEffect(() => {
+    socketClient.connect();
     const uniqueId = generateUniqueId({
       length: 10,
     });
@@ -19,13 +20,13 @@ const ConnectDevice = () => {
 
     socketClient.emit("roomId", uniqueId);
 
-    socketClient.on("roomfull", (arg) => {
-      if (arg === "ping") {
+    socketClient.on("count", (count) => {
+      if (count === 2) {
         router.push(`http://localhost:3000/canva/${uniqueId}`);
       }
     });
     return () => {
-      socketClient.off("deviceConnected");
+      socketClient.off("count");
       socketClient.close();
     };
   }, []);

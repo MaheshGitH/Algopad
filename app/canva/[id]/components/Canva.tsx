@@ -11,27 +11,38 @@ const Canva = () => {
   const id = useParams().id;
   const [connected, setConnected] = useState(false);
   const [connect, setConnect] = useState(false);
+  const [fingers, setFingers] = useState(0);
 
   useEffect(() => {
-    socketClient.emit("roomId", id);
-    socketClient.emit("ping", "ping");
-    socketClient.on("count", (count) => {
-      if (count === 2) {
-        setConnected(true);
+    socketClient.connect();
 
-        setConnect(false);
-      }
-
-      setConnect(false);
-
-      if (count === 1) setConnected(false);
+    socketClient.on("fingers", (value) => {
+      setFingers(value);
     });
+    function handleConnection() {
+      socketClient.emit("roomId", id);
+
+      socketClient.on("count", (count) => {
+        if (count === 2) {
+          setConnected(true);
+          setConnect(false);
+        } else if (count === 1) {
+          setConnected(false);
+        }
+      });
+    }
+
+    if (socketClient.connected) {
+      handleConnection();
+    } else {
+      socketClient.on("connect", handleConnection);
+    }
 
     return () => {
-      socketClient.close();
+      socketClient.off("connect", handleConnection);
       socketClient.off("count");
     };
-  }, []);
+  }, [id]);
 
   return (
     <main className="text-white h-screen flex flex-col">
@@ -45,6 +56,7 @@ const Canva = () => {
         connect={connect}
       />
       <CanvaArea connect={connected} />
+      <p className=" bg-dark">{fingers}</p>
     </main>
   );
 };

@@ -1,20 +1,20 @@
 import socketClient from "@/app/socket";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface Props {
   connect: boolean;
 }
 
 const CanvaArea = ({ connect }: Props) => {
-  const [xAndy, setxAndy] = useState({ x: 0, y: 0 });
   const [dimension, setDimension] = useState({ height: 0, width: 0 });
   const [isPortrait, setIsPortrait] = useState<boolean>();
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [currentPos, setCurrentPos] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [lastPos, setLastPos] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    socketClient.on("coordinates", (pos) => {
-      setxAndy(pos);
-    });
-
     socketClient.on("dimension", (w, h) => {
       setDimension({ height: h, width: w });
     });
@@ -22,11 +22,18 @@ const CanvaArea = ({ connect }: Props) => {
     socketClient.on("orientation", (portrait) => {
       setIsPortrait(portrait);
     });
+
+    socketClient.on("coordinates", (pos) => {
+      setLastPos(currentPos);
+      setCurrentPos(pos);
+    });
+
     return () => {
       socketClient.off("coordinates");
       socketClient.off("dimension");
+      socketClient.off("orientation");
     };
-  }, []);
+  }, [currentPos]);
 
   useEffect(() => {
     if (!connect) {
@@ -34,20 +41,43 @@ const CanvaArea = ({ connect }: Props) => {
     }
   }, [connect]);
 
+  const draw = () => {
+    const canvas = canvasRef.current;
+    const context = canvas?.getContext("2d");
+
+    if (canvas && context && lastPos && currentPos) {
+      context.strokeStyle = "white";
+      context.lineWidth = 2;
+      context.lineCap = "round";
+
+      context.beginPath();
+      context.moveTo(lastPos.x, lastPos.y);
+      context.lineTo(currentPos.x, currentPos.y);
+      context.stroke();
+
+      setLastPos(currentPos);
+    }
+  };
+
+  useEffect(() => {
+    const animate = () => {
+      draw();
+      requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
+  }, [lastPos, currentPos]);
+
   return (
-    <div className="flex-grow bg-dark -z-10">
+    <div className="flex-grow bg-dark -z-10 relative">
+      <canvas ref={canvasRef} className="w-full h-full" />
       <div
         style={{
-          height: `${isPortrait ? dimension.width : dimension.height}px`,
-          width: `${isPortrait ? dimension.height : dimension.width}px`,
+          width: isPortrait ? dimension.height : dimension.width,
+          height: isPortrait ? dimension.width : dimension.height,
         }}
-        className="relative border border-primary overflow-clip rounded-lg"
-      >
-        <span
-          style={{ top: `${xAndy.y}px`, left: `${xAndy.x}px` }}
-          className="bg-white size-2 absolute"
-        ></span>
-      </div>
+        className="absolute border border-primary bg-white size-8"
+      ></div>
     </div>
   );
 };

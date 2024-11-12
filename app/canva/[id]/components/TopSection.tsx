@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface Props {
   isConnected: boolean;
@@ -6,11 +6,23 @@ interface Props {
 }
 
 const TopSection = ({ isConnected, connect }: Props) => {
+  const [hide, setHide] = useState(false);
+  useEffect(() => {
+    if (isConnected) return;
+    setHide(false);
+  }, [isConnected]);
   return (
-    <div className="flex items-center gap-2 bg-black py-4 ~px-4/12 font-laila font-medium border-b border-primary">
+    <div
+      className={`${
+        hide ? " hidden " : " flex "
+      } items-center gap-2 bg-black py-4 ~px-4/12 font-laila font-medium border-b border-primary`}
+    >
       <img className="~size-6/8" src="/coloredLogo.svg" alt="App logo" />
       <p className="~text-lg/xl">Algopad</p>
       <div className="font-nunito text-base ml-auto flex gap-8">
+        <button disabled={!isConnected} onClick={() => setHide(true)}>
+          Hide
+        </button>
         <span className="hidden sm:block">22:12:33</span>
         <div className="flex items-center gap-2">
           <span className="relative flex h-3 w-3">
