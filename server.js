@@ -30,16 +30,8 @@ app.prepare().then(() => {
         deviceCount(id);
       });
 
-      socket.on("coordinates", (cor) => {
-        io.to(id).emit("coordinates", cor);
-      });
-
-      socket.on("dimension", (w, h) => {
-        io.to(id).emit("dimension", w, h);
-      });
-
-      socket.on("orientation", (portrait) => {
-        io.to(id).emit("orientation", portrait);
+      socket.on("move", (cor) => {
+        io.to(id).emit("move", cor);
       });
 
       socket.on("fingers", (value) => {

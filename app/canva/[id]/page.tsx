@@ -1,8 +1,9 @@
 import React from "react";
-import Canva from "./components/Canva";
+
+import CanvaPage from "./components/CanvaPage";
 
 const page = () => {
-  return <Canva />;
+  return <CanvaPage />;
 };
 
 export default page;

@@ -13,10 +13,7 @@ const FullScreen = () => {
     }
   }
   return (
-    <button
-      onClick={handleFullscreen}
-      className="absolute top-3 right-4 text-white"
-    >
+    <button onClick={handleFullscreen} className="absolute top-3 right-4">
       {fullScreen ? "Exit-full screen" : "Full screen"}
     </button>
   );
