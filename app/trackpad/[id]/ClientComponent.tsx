@@ -10,7 +10,6 @@ const ClientComponent = () => {
   const params = useParams();
   const [currentPos, setCurrentPos] = useState<TwoNumbers>({ x: 0, y: 0 });
   const [previousPos, setPreviousPos] = useState<TwoNumbers>({ x: 0, y: 0 });
-  const [draw, setDraw] = useState(false);
 
   function handleTouchStart(e: React.TouchEvent<HTMLDivElement>) {
     socketClient.emit("fingers", e.touches.length);
@@ -52,11 +51,6 @@ const ClientComponent = () => {
     };
   }, []);
 
-  const handleClick = () => {
-    socketClient.emit("draw", draw);
-    setDraw((prev) => !prev);
-  };
-
   return (
     <div className="bg-primary p-0.5 absolute inset-0 text-white">
       <FullScreen />{" "}
@@ -66,9 +60,6 @@ const ClientComponent = () => {
         onTouchEnd={handleTouchEnd}
         className="bg-dark w-full h-full rounded-lg"
       ></div>
-      <button onClick={handleClick} className="absolute top-3 left-3">
-        {draw ? "Move" : "Draw"}
-      </button>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const Nav = () => {
@@ -42,47 +43,59 @@ const Nav = () => {
       clearTimeout(timerID);
     };
   }, [isOpen]);
+
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <>
       <div className="-mb-40 hidden md:block w-full max-w-7xl mx-auto border-b border-primaryLinted">
         <span className="flex items-center gap-2 mt-8 mb-2 ml-4 font-laila font-medium">
-          <img className="~size-10/12" src="coloredLogo.svg" alt="App logo" />
+          <Image width={40} height={40} src="coloredlogo.svg" alt="App logo" />
           <p className="~text-lg/xl">Algopad</p>
         </span>
       </div>
       <div className="pt-4 flex justify-center items-center w-full sticky top-0 px-4">
         <nav className="flex items-center justify-between bg-gradient rounded-full px-8 py-4 shadow-nav max-w-2xl w-full md:w-fit relative backdrop-blur-xl">
           <span className="flex items-center gap-2 font-laila font-medium md:hidden">
-            <img className="size-10" src="whiteLogo.svg" alt="App logo" />
+            <Image width={40} height={40} src="whiteLogo.svg" alt="App logo" />
             <p className="hidden sm:block">Algopad</p>
           </span>
           <ul className="hidden gap-4 font-nunito ~text-base/lg text-nowrap md:flex">
             <li>
-              <a href="#features" className="hover:text-white/65 duration-150">
+              <button
+                onClick={() => scrollToSection("features")}
+                className="hover:text-white/65 duration-150"
+              >
                 Features
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#how-it-works"
+              <button
+                onClick={() => scrollToSection("how-it-works")}
                 className="hover:text-white/65 duration-150"
               >
                 How it works
-              </a>
+              </button>
             </li>
             <li>
-              <a
-                href="#demo-account"
+              <button
+                onClick={() => scrollToSection("demo-account")}
                 className="hover:text-white/65 duration-150"
               >
                 Demo account
-              </a>
+              </button>
             </li>
           </ul>
-          <img
+          <Image
             ref={menuRef}
             onClick={modalStateToggle}
             className="cursor-pointer size-8 md:hidden"
+            width={32}
+            height={32}
             src="menu.svg"
             alt="menu"
           />

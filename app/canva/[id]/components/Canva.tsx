@@ -65,9 +65,6 @@ const Canva = () => {
   useEffect(() => {
     setLastPos(currentPos);
   }, [currentPos]);
-
-  console.log(draw);
-
   return (
     <>
       <canvas

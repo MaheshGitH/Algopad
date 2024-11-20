@@ -1,8 +1,10 @@
+import Image from "next/image";
+
 const Footer = () => {
   return (
     <div className="lg:mx-auto">
       <div className="flex flex-col md:flex-row ~gap-10/36 px-6 py-8 border-b-2 bg-black max-w-5xl border-primaryLinted md:rounded-t-2xl ">
-        <img className="w-12 h-11" src="coloredLogo.svg" alt="app logo" />
+        <Image width={48} height={44} src="coloredlogo.svg" alt="app logo" />
         <div className="flex flex-col gap-6">
           <p className="font-laila font-medium text-2xl text-primary">
             Resources

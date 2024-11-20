@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 interface Props {
@@ -17,7 +18,8 @@ const TopSection = ({ isConnected, connect }: Props) => {
         hide ? " hidden " : " flex "
       } items-center gap-2 bg-black py-4 ~px-4/12 font-laila font-medium border-b border-primary`}
     >
-      <img className="~size-6/8" src="/coloredLogo.svg" alt="App logo" />
+      <Image width={32} height={32} src="/coloredlogo.svg" alt="App logo" />
+
       <p className="~text-lg/xl">Algopad</p>
       <div className="font-nunito text-base ml-auto flex gap-8">
         <button disabled={!isConnected} onClick={() => setHide(true)}>

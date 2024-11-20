@@ -3,7 +3,7 @@ import { steps } from "./content";
 
 const HowItWork = () => {
   return (
-    <div className="max-w-2xl lg:max-w-4xl w-full mx-auto ">
+    <div id="how-it-works" className="max-w-2xl lg:max-w-4xl w-full mx-auto ">
       <h3 className="font-laila font-semibold ~text-2xl/4xl text-center">
         How it works
       </h3>
