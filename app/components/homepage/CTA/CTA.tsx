@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const CTA = () => {
   return (
     <div
@@ -14,9 +16,12 @@ const CTA = () => {
         </p>
       </div>
 
-      <button className="px-8 py-4 bg-gradient hover:bg-gradientFlip rounded-lg mt-3 h-fit w-fit ~text-base/lg lg:text-nowrap">
+      <Link
+        href="?device=choose"
+        className="px-8 py-4 bg-gradient hover:bg-gradientFlip rounded-lg mt-3 h-fit w-fit ~text-base/lg lg:text-nowrap"
+      >
         Try It Now
-      </button>
+      </Link>
     </div>
   );
 };

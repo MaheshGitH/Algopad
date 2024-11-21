@@ -18,7 +18,7 @@ const ConnectDevice = ({ connect, id, close }: Props) => {
         <QRCode
           bgColor="none"
           className="sm:size-72 rounded-2xl mx-auto border-2 p-4 border-black"
-          value={`http://192.168.29.100:3000/trackpad/${id}`}
+          value={`https://algopad-production.up.railway.app/trackpad/${id}`}
         />
         <div className="flex justify-between gap-32 items-center">
           <span className="bg-primary w-full h-1 rounded-full" />
@@ -28,7 +28,7 @@ const ConnectDevice = ({ connect, id, close }: Props) => {
         <p>
           Type the URL into your mobile browser to connect your phone:{" "}
           <span className="font-laila bg-black px-1">
-            {`http://localhost:3000/trackpad/${id}`}
+            {`https://algopad-production.up.railway.app/trackpad/${id}`}
           </span>
         </p>
         <button onClick={() => close(true)} className="absolute right-0 top-0">

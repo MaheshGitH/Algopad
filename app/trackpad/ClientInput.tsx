@@ -18,7 +18,7 @@ const ClientInput = () => {
       />
       <a
         className="absolute right-0 top-0 bottom-0 rounded-tr-md rounded-br-md content-center px-4 border-l border-primaryLinted hover:bg-white/10 duration-150"
-        href={`http://localhost:3000/trackpad/${inputValue}`}
+        href={`https://algopad-production.up.railway.app/trackpad/${inputValue}`}
       >
         Connect
       </a>

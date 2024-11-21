@@ -2,6 +2,6 @@
 
 import { io } from "socket.io-client";
 
-const socketClient = io("http://localhost:3000");
+const socketClient = io();
 
 export default socketClient;
