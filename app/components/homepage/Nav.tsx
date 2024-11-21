@@ -60,10 +60,13 @@ const Nav = () => {
       </div>
       <div className="pt-4 flex justify-center items-center w-full sticky top-0 px-4">
         <nav className="flex items-center justify-between bg-gradient rounded-full px-8 py-4 shadow-nav max-w-2xl w-full md:w-fit relative backdrop-blur-xl">
-          <span className="flex items-center gap-2 font-laila font-medium md:hidden">
+          <button
+            onClick={() => scrollToSection("top")}
+            className="flex items-center gap-2 font-laila font-medium md:hidden"
+          >
             <Image width={40} height={40} src="whiteLogo.svg" alt="App logo" />
             <p className="hidden sm:block">Algopad</p>
-          </span>
+          </button>
           <ul className="hidden gap-4 font-nunito ~text-base/lg text-nowrap md:flex">
             <li>
               <button
@@ -107,9 +110,24 @@ const Nav = () => {
                 animation ? " scale-100 " : " scale-90 "
               } duration-500 `}
             >
-              <button>Features</button>
-              <button>How it works</button>
-              <button>Demo account</button>
+              <button
+                onClick={() => scrollToSection("features")}
+                className="hover:text-white/65 duration-150"
+              >
+                Features
+              </button>
+              <button
+                onClick={() => scrollToSection("how-it-works")}
+                className="hover:text-white/65 duration-150"
+              >
+                How it works
+              </button>
+              <button
+                onClick={() => scrollToSection("demo-account")}
+                className="hover:text-white/65 duration-150"
+              >
+                Demo account
+              </button>
             </div>
           )}
         </nav>

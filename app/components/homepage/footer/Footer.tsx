@@ -50,9 +50,7 @@ const Footer = () => {
       <div className="flex gap-2 ml-4 my-4 mb-10 font-nunito ~text-xs/base">
         <p>&copy;&nbsp;&nbsp;&nbsp;2024 Mahesh. All Rights Reserved</p>
         <span className="border border-primaryLinted rounded-full" />
-        <a href="#TOS" className="underline">
-          Terms of service
-        </a>
+        <span className="underline">Terms of service</span>
       </div>
     </div>
   );
